@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  role      String    @default("user") // "user" veya "admin"
+  reviews   Review[]
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+}
+
+model Movie {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  releaseDate DateTime
+  reviews     Review[]
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  createdAt   DateTime @default(now())
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  content   String
+  rating    Int      @default(0)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  movie     Movie    @relation(fields: [movieId], references: [id])
+  movieId   Int
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  content     String
+  createdAt   DateTime @default(now())
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId    Int
+  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId  Int
+}
+
+model Category {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  movies   Movie[]
+}
