@@ -13,6 +13,7 @@ model User {
   email     String    @unique
   password  String
   role      String    @default("user") // "user" veya "admin"
+  createdAt DateTime  @default(now())
   reviews   Review[]
   sentMessages     Message[] @relation("SentMessages")
   receivedMessages Message[] @relation("ReceivedMessages")
@@ -23,6 +24,7 @@ model Movie {
   title       String
   description String
   releaseDate DateTime
+  imageUrl    String?
   reviews     Review[]
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int

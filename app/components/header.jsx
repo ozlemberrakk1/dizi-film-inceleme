@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useSession, signOut } from 'next-auth/react';
-import { Search, MessageCircle, User, LogOut } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { Search, MessageCircle, User, Settings } from 'lucide-react';
 
 export default function Header() {
   const { data: session } = useSession();
@@ -13,10 +13,6 @@ export default function Header() {
     e.preventDefault();
     // Arama işlemi burada yapılacak
     console.log('Arama:', searchQuery);
-  };
-
-  const handleSignOut = async () => {
-    await signOut({ callbackUrl: '/' });
   };
 
   return (
@@ -53,6 +49,15 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             {session ? (
               <>
+                {session.user.role === 'admin' && (
+                  <Link
+                    href="/admin"
+                    className="text-gray-600 hover:text-indigo-600 flex items-center"
+                  >
+                    <Settings className="h-5 w-5 mr-1" />
+                    <span>Admin Panel</span>
+                  </Link>
+                )}
                 <Link
                   href="/messages"
                   className="text-gray-600 hover:text-indigo-600 flex items-center"
@@ -67,13 +72,6 @@ export default function Header() {
                   <User className="h-5 w-5 mr-1" />
                   <span>Profil</span>
                 </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="text-gray-600 hover:text-indigo-600 flex items-center"
-                >
-                  <LogOut className="h-5 w-5 mr-1" />
-                  <span>Çıkış Yap</span>
-                </button>
               </>
             ) : (
               <>
