@@ -66,7 +66,8 @@ export async function POST(request) {
         title: data.title,
         description: data.description,
         releaseDate: new Date(data.releaseYear),
-        categoryId: category.id
+        categoryId: category.id,
+        imageUrl: data.imageUrl
       },
       include: {
         category: true
@@ -117,7 +118,8 @@ export async function PUT(request) {
         title: data.title,
         description: data.description,
         releaseDate: new Date(data.releaseYear),
-        categoryId: category.id
+        categoryId: category.id,
+        imageUrl: data.imageUrl
       },
       include: {
         category: true

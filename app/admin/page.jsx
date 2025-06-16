@@ -17,7 +17,7 @@ export default function AdminDashboard() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Admin Paneli</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Link
           href="/admin/users"
           className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow"
@@ -35,6 +35,16 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-semibold mb-2">İçerik Yönetimi</h2>
           <p className="text-gray-600">
             Film ve dizileri ekleyin, düzenleyin ve yönetin.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/reviews"
+          className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow"
+        >
+          <h2 className="text-xl font-semibold mb-2">Yorumlar</h2>
+          <p className="text-gray-600">
+            Kullanıcı yorumlarını görüntüleyin ve yönetin.
           </p>
         </Link>
       </div>
