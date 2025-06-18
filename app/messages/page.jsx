@@ -20,10 +20,14 @@ export default function MessagesPage() {
   }, [selectedUser]);
 
   async function fetchUsers() {
-    const res = await fetch("/api/admin/users");
+    const res = await fetch("/api/users");
     const data = await res.json();
-    setUsers(data);
+  
+    // Eğer veri bir dizi değilse ve içinde "users" varsa orayı al
+    const userList = Array.isArray(data) ? data : data.users || [];
+    setUsers(userList);
   }
+  
 
   async function fetchMessages() {
     setLoading(true);
