@@ -21,19 +21,28 @@ Bu proje, kullanıcıların dizi ve filmler hakkında inceleme ve yorum yapabild
    # veya
    yarn install
    ```
+2. **.env dosyasını oluştur:**
 
-2. **Veritabanını kurun ve seed verisini ekleyin:**
+   ```bash
+   DATABASE_URL="file:./prisma/dev.db"
+   NEXTAUTH_SECRET=bir-gizli-kod
+   NEXTAUTH_URL=http://localhost:3000
+   ```
+
+3. **Veritabanını kurun ve seed verisini ekleyin:**
+
    ```bash
    npx prisma migrate dev --name init
    npm run prisma:seed
    ```
 
-3. **Geliştirme sunucusunu başlatın:**
+4. **Geliştirme sunucusunu başlatın:**
+
    ```bash
    npm run dev
    ```
 
-4. **Uygulamayı açın:**  
+5. **Uygulamayı açın:**  
    [http://localhost:3000](http://localhost:3000)
 
 > Varsayılan admin hesabı:  
